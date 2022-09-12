@@ -436,6 +436,10 @@
         {
           "type": "SYMBOL",
           "name": "_unicode_code"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_control_code"
         }
       ]
     },
@@ -445,20 +449,36 @@
     },
     "_hex_code": {
       "type": "PATTERN",
-      "value": "\\\\x[0-9A-Fa-f]{1,2}"
+      "value": "\\\\x[0-9A-Fa-f]{2}"
     },
     "_unicode_code": {
       "type": "CHOICE",
       "members": [
         {
           "type": "PATTERN",
-          "value": "\\\\u[0-9A-Fa-f]{1,4}"
+          "value": "\\\\u[0-9A-Fa-f]{4}"
         },
         {
           "type": "PATTERN",
-          "value": "\\\\U[0-9A-Fa-f]{1,8}"
+          "value": "\\\\U[0-9A-Fa-f]{8}"
         }
       ]
+    },
+    "_control_code": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\\\\c[\\x00-\\x5B\\x5D-\\x7F]"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\\\c\\\\\\\\"
+          }
+        ]
+      }
     },
     "range_notation": {
       "type": "PREC_LEFT",
@@ -476,17 +496,20 @@
               {
                 "type": "ALIAS",
                 "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "!"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "^"
-                    }
-                  ]
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "!"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "^"
+                      }
+                    ]
+                  }
                 },
                 "named": true,
                 "value": "range_negation"
@@ -571,17 +594,20 @@
       }
     },
     "_class_char": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[^-\\\\\\]\\n]"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\\\[-\\\\\\[\\]]"
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[^-\\\\\\]\\n]"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\\\[-\\\\\\[\\]!^]"
+          }
+        ]
+      }
     },
     "character_class": {
       "type": "TOKEN",
@@ -653,21 +679,24 @@
       }
     },
     "wildcard": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "?"
-        },
-        {
-          "type": "STRING",
-          "value": "*"
-        },
-        {
-          "type": "STRING",
-          "value": "**"
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "?"
+          },
+          {
+            "type": "STRING",
+            "value": "*"
+          },
+          {
+            "type": "STRING",
+            "value": "**"
+          }
+        ]
+      }
     },
     "dir_sep": {
       "type": "STRING",
@@ -769,17 +798,20 @@
               "content": {
                 "type": "ALIAS",
                 "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "true"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "false"
-                    }
-                  ]
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "true"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "false"
+                      }
+                    ]
+                  }
                 },
                 "named": true,
                 "value": "boolean_value"

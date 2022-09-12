@@ -258,28 +258,11 @@
     }
   },
   {
-    "type": "wildcard",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "\"",
     "named": false
   },
   {
-    "type": "*",
-    "named": false
-  },
-  {
-    "type": "**",
-    "named": false
-  },
-  {
     "type": "-",
-    "named": false
-  },
-  {
-    "type": "?",
     "named": false
   },
   {
@@ -401,6 +384,10 @@
   {
     "type": "whitespace",
     "named": false
+  },
+  {
+    "type": "wildcard",
+    "named": true
   },
   {
     "type": "working-tree-encoding",

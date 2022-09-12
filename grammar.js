@@ -110,7 +110,6 @@ module.exports = grammar({
 
     escaped_char: _ => /\\[\\\[\]!?*]/,
 
-    // TODO: \c control characters
     ansi_c_escape: $ => prec.right(
       1, choice(
         $._special_char, $._char_code
@@ -122,22 +121,27 @@ module.exports = grammar({
     _char_code: $ => choice(
       $._octal_code,
       $._hex_code,
-      $._unicode_code
+      $._unicode_code,
+      $._control_code
     ),
 
     _octal_code: _ => /\\\d{1,3}/,
 
-    _hex_code: _ => /\\x[0-9A-Fa-f]{1,2}/,
+    _hex_code: _ => /\\x[0-9A-Fa-f]{2}/,
 
     _unicode_code: _ => choice(
-        /\\u[0-9A-Fa-f]{1,4}/,
-        /\\U[0-9A-Fa-f]{1,8}/
+        /\\u[0-9A-Fa-f]{4}/,
+        /\\U[0-9A-Fa-f]{8}/
     ),
+
+    _control_code: _ => token(choice(
+      /\\c[\x00-\x5B\x5D-\x7F]/, /\\c\\\\/
+    )),
 
     range_notation: $ => prec.left(seq(
       '[',
       optional(alias(
-        choice('!', '^'),
+        token(choice('!', '^')),
         $.range_negation
       )),
       repeat1(choice(
@@ -158,15 +162,15 @@ module.exports = grammar({
       )
     ),
 
-    _class_char: _ => choice(
-      /[^-\\\]\n]/, /\\[-\\\[\]]/
-    ),
+    _class_char: _ => token(choice(
+      /[^-\\\]\n]/, /\\[-\\\[\]!^]/
+    )),
 
     character_class: _ => token(seq(
       '[:', choice(...POSIX_CLASSES), ':]'
     )),
 
-    wildcard: _ => choice('?', '*', '**'),
+    wildcard: _ => token(choice('?', '*', '**')),
 
     dir_sep: _ => '/',
 
@@ -189,7 +193,7 @@ module.exports = grammar({
       // TODO: can values be quoted?
       choice(
         prec(2, alias(
-          choice('true', 'false'),
+          token(choice('true', 'false')),
           $.boolean_value
         )),
         prec(1, alias(/\S+/, $.string_value))

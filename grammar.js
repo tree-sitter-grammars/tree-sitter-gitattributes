@@ -44,12 +44,6 @@ const POSIX_CLASSES = [
   'xdigit'
 ];
 
-/** New line token */
-const NL = /\r?\n/;
-
-/** Whitespace token */
-const WS = /[ \t]+/;
-
 /**
  * Returns a quoted or unquoted pattern sequence
  * @param {GrammarSymbols<any>} $ the symbols of the grammar
@@ -74,16 +68,16 @@ module.exports = grammar({
     file: $ => repeat($._line),
 
     _line: $ => choice(
-      seq(optional(WS), $.comment, NL),
-      seq(optional(WS), $._attr_list, NL),
-      seq(optional(WS), $.macro_def, NL),
-      seq(optional(WS), NL)
+      seq(optional($._space), $.comment, $._eol),
+      seq(optional($._space), $._attr_list, $._eol),
+      seq(optional($._space), $.macro_def, $._eol),
+      seq(optional($._space), $._eol)
     ),
 
     _attr_list: $ => seq(
       prec.left(choice($.pattern, $.quoted_pattern)),
-      repeat1(seq(WS, $.attribute)),
-      optional(WS)
+      repeat1(seq($._space, $.attribute)),
+      optional($._space)
     ),
 
     pattern: $ => seq(...__pattern($, false)),
@@ -103,7 +97,7 @@ module.exports = grammar({
     _quoted_pattern: $ => repeat1(choice(
       /[^\n/]/,
       choice($.ansi_c_escape, $.escaped_char),
-      alias('\\', $.redundant_escape)
+      alias('\\', $.redundant_escape),
     )),
 
     _pattern_char: _ => /[^\s/?*]/,
@@ -190,7 +184,6 @@ module.exports = grammar({
     _attr_with_value: $ => seq(
       choice($.attr_name, $.builtin_attr),
       alias('=', $.attr_set),
-      // TODO: can values be quoted?
       choice(
         prec(2, alias(
           token(choice('true', 'false')),
@@ -207,10 +200,14 @@ module.exports = grammar({
     macro_def: $ => seq(
       alias('[attr]', $.macro_tag),
       field('macro_name', $.attr_name),
-      repeat1(seq(WS, $.attribute)),
-      optional(WS)
+      repeat1(seq($._space, $.attribute)),
+      optional($._space)
     ),
 
-    comment: _ => /#[^\n]*/
+    comment: _ => /#[^\n]*/,
+
+    _eol: _ => /\r?\n/,
+
+    _space: _ => prec(-1, /[ \t]+/)
   }
 });

@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-gitattributes",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "description": "gitattributes grammar for tree-sitter",
   "repository": "ObserverOfTime/tree-sitter-gitattributes",

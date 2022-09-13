@@ -19,8 +19,8 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
+                  "type": "SYMBOL",
+                  "name": "_space"
                 },
                 {
                   "type": "BLANK"
@@ -32,8 +32,8 @@
               "name": "comment"
             },
             {
-              "type": "PATTERN",
-              "value": "\\r?\\n"
+              "type": "SYMBOL",
+              "name": "_eol"
             }
           ]
         },
@@ -44,8 +44,8 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
+                  "type": "SYMBOL",
+                  "name": "_space"
                 },
                 {
                   "type": "BLANK"
@@ -57,8 +57,8 @@
               "name": "_attr_list"
             },
             {
-              "type": "PATTERN",
-              "value": "\\r?\\n"
+              "type": "SYMBOL",
+              "name": "_eol"
             }
           ]
         },
@@ -69,8 +69,8 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
+                  "type": "SYMBOL",
+                  "name": "_space"
                 },
                 {
                   "type": "BLANK"
@@ -82,8 +82,8 @@
               "name": "macro_def"
             },
             {
-              "type": "PATTERN",
-              "value": "\\r?\\n"
+              "type": "SYMBOL",
+              "name": "_eol"
             }
           ]
         },
@@ -94,8 +94,8 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
+                  "type": "SYMBOL",
+                  "name": "_space"
                 },
                 {
                   "type": "BLANK"
@@ -103,8 +103,8 @@
               ]
             },
             {
-              "type": "PATTERN",
-              "value": "\\r?\\n"
+              "type": "SYMBOL",
+              "name": "_eol"
             }
           ]
         }
@@ -136,8 +136,8 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "[ \\t]+"
+                "type": "SYMBOL",
+                "name": "_space"
               },
               {
                 "type": "SYMBOL",
@@ -150,8 +150,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "PATTERN",
-              "value": "[ \\t]+"
+              "type": "SYMBOL",
+              "name": "_space"
             },
             {
               "type": "BLANK"
@@ -929,8 +929,8 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "[ \\t]+"
+                "type": "SYMBOL",
+                "name": "_space"
               },
               {
                 "type": "SYMBOL",
@@ -943,8 +943,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "PATTERN",
-              "value": "[ \\t]+"
+              "type": "SYMBOL",
+              "name": "_space"
             },
             {
               "type": "BLANK"
@@ -956,6 +956,18 @@
     "comment": {
       "type": "PATTERN",
       "value": "#[^\\n]*"
+    },
+    "_eol": {
+      "type": "PATTERN",
+      "value": "\\r?\\n"
+    },
+    "_space": {
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "PATTERN",
+        "value": "[ \\t]+"
+      }
     }
   },
   "extras": [],

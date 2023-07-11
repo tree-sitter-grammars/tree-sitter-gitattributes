@@ -247,3 +247,18 @@ Quoted patterns
     (builtin_attr)
     (attr_set)
     (string_value)))
+
+==============
+Blank comments
+==============
+
+# This is some text
+#
+# It is a comment
+
+---
+
+(file
+  (comment)
+  (comment)
+  (comment))

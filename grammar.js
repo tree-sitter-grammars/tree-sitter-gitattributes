@@ -204,7 +204,7 @@ module.exports = grammar({
       optional($._space)
     ),
 
-    comment: _ => /#[^\n]*/,
+    comment: _ => seq('#', repeat(/[^\n]/)),
 
     _eol: _ => /\r?\n/,
 

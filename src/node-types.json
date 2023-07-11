@@ -54,6 +54,11 @@
     "fields": {}
   },
   {
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "file",
     "named": true,
     "fields": {},
@@ -262,6 +267,10 @@
     "named": false
   },
   {
+    "type": "#",
+    "named": false
+  },
+  {
     "type": "-",
     "named": false
   },
@@ -299,10 +308,6 @@
   },
   {
     "type": "character_class",
-    "named": true
-  },
-  {
-    "type": "comment",
     "named": true
   },
   {

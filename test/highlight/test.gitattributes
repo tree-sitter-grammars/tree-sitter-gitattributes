@@ -1,5 +1,5 @@
 [attr]nodiff -diff -merge
-# <- preproc
+# <- keyword
 #     ^^^^^^ property
 #            ^ operator
 #             ^^^^ variable.builtin
@@ -8,8 +8,8 @@
 
 vendor/** linguist-vendored=true
 #     ^ punctuation.delimiter
-#      ^^ character.special
-#         ^^^^^^^^^^^^^^^^^ parameter
+#      ^^ string.regexp
+#         ^^^^^^^^^^^^^^^^^ variable.parameter
 #                          ^ operator
 #                           ^^^^ boolean
 
@@ -22,13 +22,13 @@ vendor/** linguist-vendored=true
 #        ^^^^^^^^^ constant
 #                 ^ punctuation.bracket
 #                   ^ operator
-#                    ^^^^^^^^^^ parameter
+#                    ^^^^^^^^^^ variable.parameter
 
 "_\u4E00\t\56txt" encoding=UTF-16
 # <- punctuation.special
-# ^^^^^^ string.escape
-#       ^^ string.escape
-#         ^^^ string.escape
+# ^^^^^^ escape
+#       ^^ escape
+#         ^^^ escape
 #               ^ punctuation.special
 #                 ^^^^^^^^ variable.builtin
 #                         ^ operator

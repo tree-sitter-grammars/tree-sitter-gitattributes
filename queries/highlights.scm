@@ -1,28 +1,28 @@
 (dir_sep) @punctuation.delimiter
 
 (quoted_pattern
-  ("\"" @punctuation.special))
+  "\"" @punctuation.special)
 
 (range_notation) @string.special
 
 (range_notation
   [ "[" "]" ] @punctuation.bracket)
 
-(wildcard) @character.special
+(wildcard) @string.regexp
 
 (range_negation) @operator
 
 (character_class) @constant
 
-(class_range ("-" @operator))
+(class_range "-" @operator)
 
 [
   (ansi_c_escape)
   (escaped_char)
-] @string.escape
+] @escape
 
 (attribute
-  (attr_name) @parameter)
+  (attr_name) @variable.parameter)
 
 (attribute
   (builtin_attr) @variable.builtin)
@@ -37,7 +37,7 @@
 
 (string_value) @string
 
-(macro_tag) @preproc
+(macro_tag) @keyword
 
 (macro_def
   macro_name: (_) @property)
@@ -48,7 +48,4 @@
   (trailing_slash)
 ] @error
 
-(ERROR) @error
-
 (comment) @comment
-(comment) @spell

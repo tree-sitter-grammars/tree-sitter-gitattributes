@@ -2,12 +2,6 @@
  * @file Tree-sitter grammar definition
  * @author ObserverOfTime
  * @license MIT
- * @see {@link https://git-scm.com/docs/gitattributes|gitattributes documentation}
- * @see {@link https://git-scm.com/docs/gitignore#_pattern_format|pattern format}
- * @see {@link https://github.com/git/git/blob/master/attr.c|git attr source}
- * @see {@link https://github.com/git/git/blob/master/wildmatch.c|git wildmatch source}
- * @see {@link https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html|ANSI-C quoting}
- * @see {@link https://www.gnu.org/software/grep/manual/html_node/Character-Classes-and-Bracket-Expressions.html|character classes}
  */
 
 /** Built-in attribute names */

@@ -3,7 +3,7 @@
   "version": "0.1.4",
   "license": "MIT",
   "description": "gitattributes grammar for tree-sitter",
-  "repository": "ObserverOfTime/tree-sitter-gitattributes",
+  "repository": "tree-sitter-grammars/tree-sitter-gitattributes",
   "author": {
     "name": "ObserverOfTime",
     "email": "chronobserver@disroot.org",
@@ -25,7 +25,7 @@
     "nan": "^2.18.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.8"
+    "tree-sitter-cli": "~0.20.8"
   },
   "tree-sitter": [
     {

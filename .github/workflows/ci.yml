@@ -2,34 +2,22 @@ name: Test grammar
 
 on:
   push:
-    branches: [master]
+    branches: ["*"]
+    paths:
+      - grammar.js
+      - src/**
+      - bindings/**
+      - binding.gyp
   pull_request:
-    branches: [master]
+    branches: ["*"]
+    paths:
+      - grammar.js
+      - src/**
+      - bindings/**
+      - binding.gyp
 
 jobs:
-  node:
-    name: Test Node library
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        name: Checkout repository
-      - uses: actions/setup-node@v4
-        name: Set up NodeJS
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
-      - name: Run tests
-        run: npm test
-  rust:
-    name: Test Rust library
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Rust
-        uses: actions-rust-lang/setup-rust-toolchain@v1
-        with:
-          toolchain: stable
-      - name: Run tests
-        run: cargo test
+  test:
+    uses: tree-sitter-grammars/.github/.github/workflows/ci.yml@main
+    with:
+      test-library: true

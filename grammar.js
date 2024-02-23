@@ -61,11 +61,14 @@ module.exports = grammar({
   rules: {
     file: $ => repeat($._line),
 
-    _line: $ => choice(
-      seq(optional($._space), $.comment, $._eol),
-      seq(optional($._space), $._attr_list, $._eol),
-      seq(optional($._space), $.macro_def, $._eol),
-      seq(optional($._space), $._eol)
+    _line: $ => seq(
+      optional($._space),
+      optional(choice(
+        $.comment,
+        $._attr_list,
+        $.macro_def
+      )),
+      choice($._eol, $._eof)
     ),
 
     _attr_list: $ => seq(
@@ -205,8 +208,10 @@ module.exports = grammar({
 
     comment: _ => seq('#', repeat(/[^\n]/)),
 
+    _space: _ => prec(-1, /[ \t]+/),
+
     _eol: _ => /\r?\n/,
 
-    _space: _ => prec(-1, /[ \t]+/)
+    _eof: _ => '\0'
   }
 });

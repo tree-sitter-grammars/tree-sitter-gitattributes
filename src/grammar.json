@@ -10,101 +10,55 @@
       }
     },
     "_line": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_space"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_space"
             },
             {
-              "type": "SYMBOL",
-              "name": "comment"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_eol"
+              "type": "BLANK"
             }
           ]
         },
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
               "type": "CHOICE",
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_space"
+                  "name": "comment"
                 },
                 {
-                  "type": "BLANK"
+                  "type": "SYMBOL",
+                  "name": "_attr_list"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "macro_def"
                 }
               ]
             },
             {
-              "type": "SYMBOL",
-              "name": "_attr_list"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_eol"
+              "type": "BLANK"
             }
           ]
         },
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_space"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "SYMBOL",
-              "name": "macro_def"
-            },
             {
               "type": "SYMBOL",
               "name": "_eol"
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_space"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
             },
             {
               "type": "SYMBOL",
-              "name": "_eol"
+              "name": "_eof"
             }
           ]
         }
@@ -1006,6 +960,10 @@
         "type": "PATTERN",
         "value": "[ \\t]+"
       }
+    },
+    "_eof": {
+      "type": "STRING",
+      "value": "\u0000"
     }
   },
   "extras": [],

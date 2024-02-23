@@ -1,0 +1,4 @@
+[submodule "gitattributes"]
+  url = https://github.com/gitattributes/gitattributes
+  path = templates
+  shallow = true

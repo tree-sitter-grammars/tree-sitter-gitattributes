@@ -34,6 +34,7 @@
   "tree-sitter": [
     {
       "scope": "source.gitattributes",
+      "highlights": "queries/highlights.scm",
       "file-types": [
         ".gitattributes",
         "gitattributes"

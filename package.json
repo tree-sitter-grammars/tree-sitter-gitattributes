@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-gitattributes",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "description": "gitattributes grammar for tree-sitter",
   "repository": "tree-sitter-grammars/tree-sitter-gitattributes",
@@ -9,14 +9,18 @@
     "email": "chronobserver@disroot.org",
     "url": "https://observeroftime.github.io/"
   },
+  "funding": {
+    "url": "https://github.com/sponsors/ObserverOfTime",
+    "type": "github"
+  },
   "keywords": [
     "tree-sitter",
     "parser",
-    "lexer"
+    "lexer",
+    "gitattributes"
   ],
   "scripts": {
-    "generate": "tree-sitter generate",
-    "highlight": "tree-sitter highlight",
+    "build": "tree-sitter generate --no-bindings",
     "parse": "tree-sitter parse",
     "test": "tree-sitter test"
   },
@@ -25,7 +29,7 @@
     "nan": "^2.18.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "~0.20.8"
+    "tree-sitter-cli": "~0.21.0"
   },
   "tree-sitter": [
     {

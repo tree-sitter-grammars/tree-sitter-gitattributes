@@ -4,7 +4,9 @@
 //! tree-sitter [Parser][], and then use the parser to parse some code:
 //!
 //! ```
-//! let code = "*  text=auto\n";
+//! let code = r#"
+//! *  text=auto
+//! "#;
 //! let mut parser = tree_sitter::Parser::new();
 //! parser.set_language(tree_sitter_gitattributes::language()).expect("Error loading gitattributes grammar");
 //! let tree = parser.parse(code, None).unwrap();

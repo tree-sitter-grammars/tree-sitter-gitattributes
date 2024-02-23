@@ -163,7 +163,10 @@ module.exports = grammar({
     dir_sep: _ => '/',
 
     attribute: $ => choice(
-      $._attr_with_value,
+      seq(
+        choice($.attr_name, $.builtin_attr),
+        $._attr_value
+      ),
       $._prefixed_attr
     ),
 
@@ -173,10 +176,12 @@ module.exports = grammar({
         alias('-', $.attr_unset),
       )),
       choice($.attr_name, $.builtin_attr),
+      prec(-1, optional(
+        alias($._attr_value, $.ignored_value)
+      ))
     ),
 
-    _attr_with_value: $ => seq(
-      choice($.attr_name, $.builtin_attr),
+    _attr_value: $ => seq(
       alias('=', $.attr_set),
       choice(
         prec(2, alias(

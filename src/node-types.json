@@ -37,6 +37,10 @@
           "named": true
         },
         {
+          "type": "ignored_value",
+          "named": true
+        },
+        {
           "type": "string_value",
           "named": true
         }
@@ -84,6 +88,29 @@
         },
         {
           "type": "quoted_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ignored_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attr_set",
+          "named": true
+        },
+        {
+          "type": "boolean_value",
+          "named": true
+        },
+        {
+          "type": "string_value",
           "named": true
         }
       ]

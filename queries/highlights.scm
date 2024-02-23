@@ -46,6 +46,7 @@
   (pattern_negation)
   (redundant_escape)
   (trailing_slash)
+  (ignored_value)
 ] @error
 
 (comment) @comment

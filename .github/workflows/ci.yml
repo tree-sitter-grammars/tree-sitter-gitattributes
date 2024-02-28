@@ -31,12 +31,12 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-14]
     steps:
       - name: Set up repository
-        uses: tree-sitter-grammars/actions/setup@main
+        uses: tree-sitter/parser-setup-action@v1.1
         with:
           submodules: true
           node-version: ${{vars.NODE_VERSION}}
       - name: Run tests
-        uses: tree-sitter-grammars/actions/test@main
+        uses: tree-sitter/parser-test-action@v1.2
         with:
           test-library: ${{runner.os == 'Linux'}}
-          examples: templates/**/*.gitattributes
+          corpus-files: templates/**/*.gitattributes

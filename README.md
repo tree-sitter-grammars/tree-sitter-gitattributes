@@ -10,7 +10,7 @@ A tree-sitter parser for `.gitattributes` files.
 
 ## References
 
-* [gitattributes Documentation](https://git-scm.com/docs/gitattributes|)
+* [gitattributes Documentation](https://git-scm.com/docs/gitattributes)
 * [gitignore Documentation (Pattern Format)](https://git-scm.com/docs/gitignore#_pattern_format)
 * [git source code (`attr.c`)](https://github.com/git/git/blob/master/attr.c)
 * [git source code (`wildmatch.c`)](https://github.com/git/git/blob/master/wildmatch.c)

@@ -5,6 +5,10 @@ on:
     tags: ["*"]
 
 jobs:
+  release:
+    uses: tree-sitter/workflows/.github/workflows/release.yml@main
+    permissions:
+      contents: write
   npm:
     uses: tree-sitter/workflows/.github/workflows/package-npm.yml@main
     secrets:

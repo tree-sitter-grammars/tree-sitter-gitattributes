@@ -1,0 +1,29 @@
+{
+  "grammars": [
+    {
+      "name": "gitattributes",
+      "path": ".",
+      "camelcase": "GitAttributes",
+      "scope": "source.gitattributes",
+      "highlights": "queries/highlights.scm",
+      "file-types": [
+        "gitattributes",
+        ".gitattributes"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.2.0",
+    "license": "MIT",
+    "description": "gitattributes grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "ObserverOfTime",
+        "email": "chronobserver@disroot.org"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tree-sitter-grammars/tree-sitter-gitattributes"
+    }
+  }
+}

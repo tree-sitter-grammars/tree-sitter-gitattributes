@@ -1,8 +1,11 @@
 /**
- * @file Tree-sitter grammar definition
+ * @file gitattributes grammar for tree-sitter
  * @author ObserverOfTime
  * @license MIT
  */
+
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
 
 /** Built-in attribute names */
 const BUILTIN_ATTRIBUTES = [

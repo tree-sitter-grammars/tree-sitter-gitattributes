@@ -4,12 +4,14 @@
       "name": "gitattributes",
       "path": ".",
       "camelcase": "GitAttributes",
+      "title": "gitattributes",
       "scope": "source.gitattributes",
       "highlights": "queries/highlights.scm",
       "file-types": [
         "gitattributes",
         ".gitattributes"
-      ]
+      ],
+      "class-name": "TreeSitterGitAttributes"
     }
   ],
   "metadata": {

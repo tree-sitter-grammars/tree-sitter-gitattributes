@@ -5,6 +5,7 @@
 [![matrix][matrix]](https://matrix.to/#/#tree-sitter-chat:matrix.org)
 [![npm][npm]](https://www.npmjs.com/package/tree-sitter-gitattributes)
 [![crates][crates]](https://crates.io/crates/tree-sitter-gitattributes)
+[![pypi][pypi]](https://pypi.org/project/tree-sitter-gitattributes/)
 
 A tree-sitter parser for `.gitattributes` files.
 
@@ -29,3 +30,4 @@ A tree-sitter parser for `.gitattributes` files.
 [matrix]: https://img.shields.io/matrix/tree-sitter-chat%3Amatrix.org?logo=matrix&label=matrix
 [npm]: https://img.shields.io/npm/v/tree-sitter-gitattributes?logo=npm
 [crates]: https://img.shields.io/crates/v/tree-sitter-gitattributes?logo=rust
+[pypi]: https://img.shields.io/pypi/v/tree-sitter-gitattributes?logo=pypi&logoColor=ffd242

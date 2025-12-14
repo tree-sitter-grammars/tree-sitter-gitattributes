@@ -31,7 +31,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
       - name: Set up tree-sitter
@@ -46,7 +46,7 @@ jobs:
         with:
           files: templates/**/*.gitattributes
       - name: Upload failures artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: "!cancelled() && steps.parse-files.outcome == 'failure'"
         with:
           name: failures-${{runner.os}}

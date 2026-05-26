@@ -1,0 +1,182 @@
+// gitattributes grammar for tree-sitter (native DSL).
+// Translated from grammar.js.
+
+let BUILTIN_ATTRIBUTES: list_t<str_t> = [
+    "text", "eol", "crlf", "working-tree-encoding", "ident", "filter", "diff",
+    "merge", "whitespace", "export-ignore", "export-subst", "delta",
+    "encoding", "binary",
+]
+
+let POSIX_CLASSES: list_t<str_t> = [
+    "alnum", "alpha", "blank", "cntrl", "digit", "graph", "lower",
+    "print", "punct", "space", "upper", "xdigit",
+]
+
+// JS `__pattern($, quoted)` factory. Param `p` is `_pattern` or
+// `_quoted_pattern`; the trailing relative-paths repeat always uses `_pattern`.
+macro pattern_seq(p: rule_t) rule_t {
+    seq(
+        optional(alias("!", pattern_negation)),
+        optional(field(absolute, dir_sep)),
+        p,
+        repeat(seq(field(relative, dir_sep), _pattern)),
+        optional(alias(dir_sep, trailing_slash)),
+    )
+}
+
+grammar {
+    language: "gitattributes",
+    extras: [],
+    word: attr_name,
+}
+
+rule file { repeat(_line) }
+
+rule _line {
+    seq(
+        optional(_space),
+        optional(choice(comment, _attr_list, macro_def)),
+        choice(_eol, _eof),
+    )
+}
+
+rule _attr_list {
+    seq(
+        prec_left(0, choice(pattern, quoted_pattern)),
+        repeat1(seq(_space, attribute)),
+        optional(_space),
+    )
+}
+
+rule pattern { pattern_seq(_pattern) }
+
+rule _pattern {
+    repeat1(choice(
+        _pattern_char,
+        wildcard,
+        escaped_char,
+        range_notation,
+        alias("\\", redundant_escape),
+    ))
+}
+
+rule quoted_pattern {
+    seq("\"", pattern_seq(_quoted_pattern), "\"")
+}
+
+rule _quoted_pattern {
+    repeat1(choice(
+        regexp(r"[^\n/]"),
+        choice(ansi_c_escape, escaped_char),
+        alias("\\", redundant_escape),
+    ))
+}
+
+rule _pattern_char { regexp(r"[^\s/?*]") }
+
+rule escaped_char { regexp(r"\\[\\\[\]!?*]") }
+
+rule ansi_c_escape {
+    prec_right(1, choice(_special_char, _char_code))
+}
+
+rule _special_char { regexp(r#"\\[abeEfnrtv\\'"?]"#) }
+
+rule _char_code {
+    choice(_octal_code, _hex_code, _unicode_code, _control_code)
+}
+
+rule _octal_code { regexp(r"\\\d{1,3}") }
+
+rule _hex_code { regexp(r"\\x[0-9A-Fa-f]{2}") }
+
+rule _unicode_code {
+    choice(regexp(r"\\u[0-9A-Fa-f]{4}"), regexp(r"\\U[0-9A-Fa-f]{8}"))
+}
+
+rule _control_code {
+    token(choice(regexp(r"\\c[\x00-\x5B\x5D-\x7F]"), regexp(r"\\c\\\\")))
+}
+
+rule range_notation {
+    prec_left(0, seq(
+        "[",
+        optional(alias(token(choice("!", "^")), range_negation)),
+        repeat1(choice(
+            class_range,
+            character_class,
+            _class_char,
+            ansi_c_escape,
+            "-",
+        )),
+        "]",
+    ))
+}
+
+rule class_range {
+    prec_right(2, seq(
+        choice(_class_char, _char_code),
+        "-",
+        choice(_class_char, _char_code),
+    ))
+}
+
+rule _class_char {
+    token(choice(regexp(r"[^-\\\]\n]"), regexp(r"\\[-\\\[\]!^]")))
+}
+
+rule character_class {
+    token(seq("[:", choice(for (c: str_t) in POSIX_CLASSES { c }), ":]"))
+}
+
+rule wildcard { token(choice("?", "*", "**")) }
+
+rule dir_sep { "/" }
+
+rule attribute {
+    choice(
+        seq(choice(attr_name, builtin_attr), _attr_value),
+        _prefixed_attr,
+    )
+}
+
+rule _prefixed_attr {
+    seq(
+        optional(choice(alias("!", attr_reset), alias("-", attr_unset))),
+        choice(attr_name, builtin_attr),
+        prec(-1, optional(alias(_attr_value, ignored_value))),
+    )
+}
+
+rule _attr_value {
+    seq(
+        alias("=", attr_set),
+        choice(
+            prec(2, alias(token(choice("true", "false")), boolean_value)),
+            prec(1, alias(regexp(r"\S+"), string_value)),
+        ),
+    )
+}
+
+rule attr_name { regexp(r"[A-Za-z0-9_.][-A-Za-z0-9_.]*") }
+
+rule builtin_attr {
+    prec(1, choice(for (a: str_t) in BUILTIN_ATTRIBUTES { a }))
+}
+
+rule macro_def {
+    seq(
+        alias("[attr]", macro_tag),
+        field(macro_name, attr_name),
+        repeat1(seq(_space, attribute)),
+        optional(_space),
+    )
+}
+
+rule comment { seq("#", repeat(regexp(r"[^\n]"))) }
+
+rule _space { prec(-1, regexp(r"[ \t]+")) }
+
+rule _eol { regexp(r"\r?\n") }
+
+rule _eof { "\0" }

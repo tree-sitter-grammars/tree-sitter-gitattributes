@@ -7,12 +7,13 @@ Simple file
 ---
 
 (file
-  (pattern
-    (wildcard))
-  (attribute
-    (builtin_attr)
-    (attr_set)
-    (string_value)))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (builtin_attr)
+      (attr_set)
+      (string_value))))
 
 =================
 Multiple patterns
@@ -27,38 +28,42 @@ Multiple patterns
 ---
 
 (file
-  (pattern
-    (wildcard))
-  (attribute
-    (builtin_attr)
-    (attr_set)
-    (string_value))
-  (pattern
-    (wildcard))
-  (attribute
-    (builtin_attr))
-  (pattern
-    (wildcard))
-  (attribute
-    (builtin_attr))
-  (attribute
-    (builtin_attr)
-    (attr_set)
-    (string_value))
-  (pattern
-    (wildcard))
-  (attribute
-    (builtin_attr))
-  (attribute
-    (builtin_attr)
-    (attr_set)
-    (string_value))
-  (pattern
-    (wildcard))
-  (attribute
-    (attr_unset)
-    (builtin_attr)))
-
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (builtin_attr)
+      (attr_set)
+      (string_value)))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (builtin_attr)))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (builtin_attr))
+    (attribute
+      (builtin_attr)
+      (attr_set)
+      (string_value)))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (builtin_attr))
+    (attribute
+      (builtin_attr)
+      (attr_set)
+      (string_value)))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (attr_unset)
+      (builtin_attr))))
 
 ================
 Macro definition
@@ -99,42 +104,47 @@ abc	-foo -bar
 
 (file
   (comment)
-  (pattern
-    (wildcard))
-  (attribute
-    (attr_name))
-  (attribute
-    (attr_reset)
-    (attr_name))
-  (attribute
-    (attr_unset)
-    (attr_name))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (attr_name))
+    (attribute
+      (attr_reset)
+      (attr_name))
+    (attribute
+      (attr_unset)
+      (attr_name)))
   (comment)
-  (pattern)
-  (attribute
-    (attr_name))
-  (attribute
-    (attr_name))
-  (attribute
-    (attr_name))
+  (rule
+    (pattern)
+    (attribute
+      (attr_name))
+    (attribute
+      (attr_name))
+    (attribute
+      (attr_name)))
   (comment)
-  (pattern
-    (wildcard))
-  (attribute
-    (builtin_attr)
-    (attr_set)
-    (string_value))
-  (pattern)
-  (attribute
-    (attr_unset)
-    (attr_name))
-  (attribute
-    (attr_unset)
-    (attr_name))
-  (pattern
-    (wildcard))
-  (attribute
-    (attr_name)))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (builtin_attr)
+      (attr_set)
+      (string_value)))
+  (rule
+    (pattern)
+    (attribute
+      (attr_unset)
+      (attr_name))
+    (attribute
+      (attr_unset)
+      (attr_name)))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (attr_name))))
 
 ==========
 Value list
@@ -145,12 +155,13 @@ Value list
 ---
 
 (file
-  (pattern
-    (wildcard))
-  (attribute
-    (builtin_attr)
-    (attr_set)
-    (string_value)))
+  (rule
+    (pattern
+      (wildcard))
+    (attribute
+      (builtin_attr)
+      (attr_set)
+      (string_value))))
 
 =========
 Recursive
@@ -161,13 +172,14 @@ vendor/** linguist-vendored=true
 ---
 
 (file
-  (pattern
-    (dir_sep)
-    (wildcard))
-  (attribute
-    (attr_name)
-    (attr_set)
-    (boolean_value)))
+  (rule
+    (pattern
+      (dir_sep)
+      (wildcard))
+    (attribute
+      (attr_name)
+      (attr_set)
+      (boolean_value))))
 
 =============
 Simple ranges
@@ -180,22 +192,24 @@ Simple ranges
 ---
 
 (file
-  (pattern
-    (wildcard)
-    (range_notation))
-  (attribute
-    (attr_name))
-  (pattern
-    (wildcard)
-    (range_notation)
-    (range_notation)
-    (range_notation))
-  (attribute
-    (builtin_attr))
-  (attribute
-    (builtin_attr)
-    (attr_set)
-    (string_value)))
+  (rule
+    (pattern
+      (wildcard)
+      (range_notation))
+    (attribute
+      (attr_name)))
+  (rule
+    (pattern
+      (wildcard)
+      (range_notation)
+      (range_notation)
+      (range_notation))
+    (attribute
+      (builtin_attr))
+    (attribute
+      (builtin_attr)
+      (attr_set)
+      (string_value))))
 
 ===========
 More ranges
@@ -208,22 +222,24 @@ More ranges
 ---
 
 (file
-  (pattern
-    (range_notation)
-    (wildcard)
-    (range_notation
-      (class_range)))
-  (attribute
-    (attr_unset)
-    (builtin_attr))
-  (pattern
-    (range_notation
-      (range_negation))
-    (range_notation
-      (character_class)))
-  (attribute
-    (attr_reset)
-    (attr_name)))
+  (rule
+    (pattern
+      (range_notation)
+      (wildcard)
+      (range_notation
+        (class_range)))
+    (attribute
+      (attr_unset)
+      (builtin_attr)))
+  (rule
+    (pattern
+      (range_notation
+        (range_negation))
+      (range_notation
+        (character_class)))
+    (attribute
+      (attr_reset)
+      (attr_name))))
 
 ===============
 Quoted patterns
@@ -236,17 +252,19 @@ Quoted patterns
 ---
 
 (file
-  (quoted_pattern)
-  (attribute
-    (builtin_attr))
-  (quoted_pattern
-    (ansi_c_escape)
-    (ansi_c_escape)
-    (ansi_c_escape))
-  (attribute
-    (builtin_attr)
-    (attr_set)
-    (string_value)))
+  (rule
+    (quoted_pattern)
+    (attribute
+      (builtin_attr)))
+  (rule
+    (quoted_pattern
+      (ansi_c_escape)
+      (ansi_c_escape)
+      (ansi_c_escape))
+    (attribute
+      (builtin_attr)
+      (attr_set)
+      (string_value))))
 
 ==============
 Blank comments

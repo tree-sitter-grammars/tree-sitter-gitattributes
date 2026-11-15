@@ -68,13 +68,13 @@ module.exports = grammar({
       optional($._space),
       optional(choice(
         $.comment,
-        $._attr_list,
+        $.rule,
         $.macro_def
       )),
       choice($._eol, $._eof)
     ),
 
-    _attr_list: $ => seq(
+    rule: $ => seq(
       prec.left(choice($.pattern, $.quoted_pattern)),
       repeat1(seq($._space, $.attribute)),
       optional($._space)

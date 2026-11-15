@@ -72,10 +72,6 @@
       "required": false,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
           "type": "comment",
           "named": true
         },
@@ -84,11 +80,7 @@
           "named": true
         },
         {
-          "type": "pattern",
-          "named": true
-        },
-        {
-          "type": "quoted_pattern",
+          "type": "rule",
           "named": true
         }
       ]
@@ -285,6 +277,29 @@
         },
         {
           "type": "range_negation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rule",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "quoted_pattern",
           "named": true
         }
       ]

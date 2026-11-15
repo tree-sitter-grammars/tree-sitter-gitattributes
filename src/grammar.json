@@ -37,7 +37,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_attr_list"
+                  "name": "rule"
                 },
                 {
                   "type": "SYMBOL",
@@ -65,7 +65,7 @@
         }
       ]
     },
-    "_attr_list": {
+    "rule": {
       "type": "SEQ",
       "members": [
         {
